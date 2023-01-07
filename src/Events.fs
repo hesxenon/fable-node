@@ -14,7 +14,9 @@ type [<AllowNullLiteral>] EventEmitter =
     abstract prependListener: ev: string * listener: ('FIn->'FOut) -> EventEmitter
     abstract prependOnceListener: ev: string * listener: ('FIn->'FOut) -> EventEmitter
     abstract removeListener: ev: string * listener: ('FIn->'FOut) -> EventEmitter
-    abstract removeAllListener: ev: string * listener: ('FIn->'FOut) -> EventEmitter
+    /// Removes all listeners, or those of the specified eventName.
+    /// It is bad practice to remove listeners added elsewhere in the code, particularly when the EventEmitter instance was created by some other component or module (e.g. sockets or file streams).
+    abstract removeAllListeners: ev: string -> EventEmitter
     abstract setMaxListeners: n: int -> EventEmitter
     abstract getMaxListeners: unit -> int
     abstract listeners: ev: string -> ResizeArray<('FIn->'FOut)>
